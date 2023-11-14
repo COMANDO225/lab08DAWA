@@ -1,0 +1,43 @@
+<div class="container">
+    <br>
+    <h3 style="font-weight: 600; text-align: center;">LAB 08 CRUD PRODUCTOS</h3>
+    <br><br>
+    <div style="display: flex;">
+        <b>Lista de productos: {{ listProducts.length }}</b>
+        <button class="btn btn-success" style="margin-left: auto; border-radius: 4px;" routerLink="/agregar">Agregar
+            Producto</button>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="listProducts.length > 0; else noProducts">
+                <tr *ngFor="let product of listProducts">
+                    <td>{{ product.nombre }}</td>
+                    <td>{{ product.descripcion }}</td>
+                    <td>S/. {{ product.precio }}</td>
+                    <td>
+                        <div style="display: flex; gap: .5rem;">
+                            <button routerLink="/editar/{{ product.id }}" class="btn btn-primary"
+                                style="border-radius: 4px;">Editar</button>
+                            <button (click)="eliminarProducto(product.id!)" class="btn btn-danger"
+                                style="border-radius: 4px;">Eliminar</button>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+
+            <ng-template #noProducts>
+                <tr>
+                    <td colspan="4" style="text-align: center;">No hay productos papu</td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </table>
+</div>
